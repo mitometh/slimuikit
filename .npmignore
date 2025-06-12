@@ -1,0 +1,43 @@
+# Source files
+components/
+contexts/
+utils/
+pages/
+public/
+styles/
+*.ts
+*.tsx
+!dist/**/*
+
+# Config files
+tsconfig.json
+tsconfig.lib.json
+tsconfig.tsbuildinfo
+next.config.js
+postcss.config.js
+tailwind.config.js
+jsconfig.json
+next-env.d.ts
+
+# Development files
+node_modules/
+.next/
+out/
+.DS_Store
+*.log
+*.lock
+
+# IDE
+.vscode/
+.idea/
+
+# Testing
+coverage/
+*.test.ts
+*.test.tsx
+
+# Other
+.env*
+.gitignore
+*.md
+!README.md
