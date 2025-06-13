@@ -1,0 +1,46 @@
+name: Simple Publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Type "yes" to confirm publish'
+        required: true
+        default: 'no'
+
+jobs:
+  publish:
+    name: Publish to NPM
+    runs-on: ubuntu-latest
+    if: github.event.inputs.confirm == 'yes'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          registry-url: 'https://registry.npmjs.org'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build package
+        run: npm run build
+      
+      - name: Check current version
+        run: |
+          echo "Current version: $(node -p "require('./package.json').version")"
+          echo "Make sure you've already updated the version in package.json!"
+      
+      - name: Publish to npm
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      
+      - name: Success message
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "Successfully published slimuikit@$VERSION to npm!"
+          echo "Install with: npm install slimuikit@$VERSION"
