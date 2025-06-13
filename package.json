@@ -12,9 +12,9 @@
   ],
   "scripts": {
     "build": "npm run clean && npm run build:esm && npm run build:cjs && npm run build:types && npm run build:css",
-    "build:esm": "tsc -p tsconfig.lib.json --module esnext --outDir dist/esm --declaration false",
-    "build:cjs": "tsc -p tsconfig.lib.json --module commonjs --outDir dist/cjs --declaration false",
-    "build:types": "tsc -p tsconfig.lib.json --emitDeclarationOnly --declaration --declarationDir dist",
+    "build:esm": "tsc --module esnext --outDir dist/esm --declaration false",
+    "build:cjs": "tsc --module commonjs --outDir dist/cjs --declaration false",
+    "build:types": "tsc --emitDeclarationOnly --declaration --declarationDir dist",
     "build:css": "postcss src/styles.css -o dist/styles.css",
     "clean": "rm -rf dist",
     "prepublishOnly": "npm run build",
